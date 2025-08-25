@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reservas de Viajes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f2f2f2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+    }
+    header {
+      background-color: #0288d1;
+      color: white;
+      width: 100%;
+      padding: 1rem 0;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .container {
+      background-color: white;
+      padding: 1.5rem;
+      border-radius: 5px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+    label {
+      display: block;
+      margin-top: 0.8rem;
+      font-weight: bold;
+    }
+    input, button {
+      width: 100%;
+      padding: 0.6rem;
+      margin-top: 0.3rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    button {
+      background-color: #0288d1;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 1rem;
+      font-size: 1.1rem;
+    }
+    button:hover {
+      background-color: #0277bd;
+    }
+    #reservations {
+      margin-top: 1.5rem;
+    }
+    .res-item {
+      background-color: #e3f2fd;
+      border-left: 4px solid #0288d1;
+      padding: 0.8rem;
+      margin-bottom: 0.8rem;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Reservas de Viajes</h1>
+  </header>
+  <div class="container">
+    <form id="res-form">
+      <label for="origin">Origen</label>
+      <input type="text" id="origin" name="origin" required>
+      <label for="destination">Destino</label>
+      <input type="text" id="destination" name="destination" required>
+      <label for="from">Fecha de salida</label>
+      <input type="date" id="from" name="from" required>
+      <label for="to">Fecha de retorno</label>
+      <input type="date" id="to" name="to" required>
+      <button type="submit">Reservar</button>
+    </form>
+    <div id="reservations"></div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('res-form');
+      const reservationsDiv = document.getElementById('reservations');
+
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+        const origin = form.origin.value;
+        const destination = form.destination.value;
+        const fromDate = form.from.value;
+        const toDate = form.to.value;
+
+        const div = document.createElement('div');
+        div.className = 'res-item';
+        div.textContent = `Origen: ${origin} → Destino: ${destination} | Salida: ${fromDate} | Retorno: ${toDate}`;
+
+        reservationsDiv.prepend(div);
+        form.reset();
+      });
+    });
+  </script>
+</body>
+</html>
